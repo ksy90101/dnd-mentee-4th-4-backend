@@ -17,12 +17,11 @@
 
 ## 코딩 컨벤션
 - Front-End, Back-End 모두 JS 사용으로 컨벤션 통일
+- [Airbnb JavaScript Convention])(https://github.com/airbnb/javascript) 사용
 
 ### 사용 Tool
-- ESLint : JavaScript 코드에서 발견 된 문제을 식별하는 정적 코드 분석 도구인
+- ESLint : JavaScript 코드에서 발견 된 문제을 식별하는 정적 코드 분석 도구
 - Prettier: 코드 포멧터 (작성한 코드를 정해진 코딩 스타일로 변환해주는 도구)
-- ESLint extend [airbnb, prettier] 사용 (추후 개발자간의 합의 후 불필요한 Rule 제거)
-- Prettier 세부 설정
 
 ### Branch 관리
 - 개발자가 개별적으로 fork한 후 개발 진행
