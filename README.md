@@ -1,6 +1,10 @@
 # 이것좀 사줘
 
-## 팀원
+## 🔗 링크
+노션 | 프론트엔드 저장소 |
+:---: | :---: 
+[링크](https://www.notion.so/DnD-4-1445a1f48ca34d17bf55beccf8263149) | [링크](https://github.com/dnd-mentee-4th/dnd-mentee-4th-4-frontend)
+## 💁 팀원
 ### Design
 김민주, 김영환
 ### Front-End
@@ -8,7 +12,7 @@
 ### Back-End
 [김세윤](https://github.com/ksy90101), [황진성](https://github.com/JinseongHwang)
 
-## 아키텍쳐
+## 📜 아키텍쳐
 ![image](https://user-images.githubusercontent.com/53366407/106076649-53bce400-6153-11eb-912e-ccfb2f318635.png)
 
 ## 코딩 컨벤션
