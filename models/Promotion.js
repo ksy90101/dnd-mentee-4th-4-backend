@@ -13,7 +13,8 @@ module.exports = class Promotion extends Sequelize.Model {
         },
         type: {
           type: Sequelize.STRING,
-          allowNull: false,
+          defaultValue: 'test',
+          allowNull: true,
         },
         title: {
           type: Sequelize.STRING,
@@ -33,11 +34,11 @@ module.exports = class Promotion extends Sequelize.Model {
         },
         startAt: {
           type: Sequelize.DATE,
-          allowNull: false,
+          allowNull: true,
         },
         endAt: {
           type: Sequelize.DATE,
-          allowNull: false,
+          allowNull: true,
         },
       },
       {

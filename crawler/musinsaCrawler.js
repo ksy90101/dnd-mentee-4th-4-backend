@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const { bulkCreate } = require('../service/promotionService.js');
 
 const BASE_URL = 'https://store.musinsa.com';
 
@@ -11,9 +12,16 @@ async function getOne(page, index) {
       (data) => data.getAttribute('href'),
     ));
 
-  promotion.iamge = await page.$eval(
+  promotion.image = await page.$eval(
     `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a > div > img`,
-    (data) => `https:${data.getAttribute('data-original')}`,
+    (data) => {
+      const image =
+        data.getAttribute('data-original') === null
+          ? data.getAttribute('src')
+          : data.getAttribute('data-original');
+
+      return `https:${image}`;
+    },
   );
 
   promotion.title = await page.$eval(
@@ -28,14 +36,13 @@ async function getOne(page, index) {
 
   promotion.startAt = await page.$eval(
     `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a > span`,
-    (data) => data.innerText,
+    (data) => data.innerText.split(' - ')[0],
   );
 
   promotion.endAt = await page.$eval(
     `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a > span`,
-    (data) => data.innerText,
+    (data) => data.innerText.split(' - ')[1],
   );
-
   return JSON.stringify(promotion);
 }
 
@@ -44,7 +51,7 @@ async function getAll(page) {
 
   const $promotions = await page.$$eval(
     'body > div.wrap > div.right_area > div.right_contents > ul > li',
-    (data) => data.length,
+    (date) => date.length,
   );
 
   for (let index = 0; index < $promotions; index++) {
@@ -74,4 +81,10 @@ const musinsaCrawler = async () => {
   return promotions;
 };
 
-module.exports = musinsaCrawler;
+const musinsaPromotionSaveAll = async () => {
+  const promotions = await musinsaCrawler();
+
+  await bulkCreate(promotions, 1);
+};
+
+module.exports = { promotionSaveAll: musinsaPromotionSaveAll };
