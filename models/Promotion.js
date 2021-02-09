@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 module.exports = class Promotion extends Sequelize.Model {
-  static init = (sequelize) =>
-    super.init(
+  static init(sequelize) {
+    return super.init(
       {
         id: {
           field: 'promotion_id',
@@ -52,4 +52,5 @@ module.exports = class Promotion extends Sequelize.Model {
         underscored: true,
       },
     );
+  }
 };
