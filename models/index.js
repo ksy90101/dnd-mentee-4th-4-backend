@@ -1,10 +1,11 @@
 const Sequelize = require('sequelize');
-const Brand = require('./Brand');
-const Category = require('./Category');
-const Promotion = require('./Promotion');
+const Brand = require('./Brand.js');
+const Category = require('./Category.js');
+const Promotion = require('./Promotion.js');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
+
 const db = {};
 
 const sequelize = new Sequelize(config);

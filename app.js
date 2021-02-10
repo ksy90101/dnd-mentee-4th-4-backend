@@ -1,4 +1,6 @@
 const express = require('express');
+const app = express();
+
 const { sequelize } = require('./models');
 const promotionRouter = require('./routes/promotionRouter.js');
 
