@@ -11,7 +11,7 @@ const findByBrand = (brandId) => {
   });
 };
 
-const bulkCreate = async (promotions, brandId) => {
+const createAll = async (promotions, brandId) => {
   const savedPromotions = promotions.forEach((promotion) => {
     const promotionJson = JSON.parse(promotion);
 
@@ -36,5 +36,5 @@ const bulkCreate = async (promotions, brandId) => {
 module.exports = {
   findAll,
   findByBrand,
-  bulkCreate
+  createAll,
 };
