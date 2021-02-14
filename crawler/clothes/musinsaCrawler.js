@@ -81,10 +81,10 @@ const musinsaCrawler = async () => {
   return promotions;
 };
 
-const musinsaPromotionSaveAll = async () => {
+const musinsaSaveAll = async () => {
   const promotions = await musinsaCrawler();
 
   await createAll(promotions, 1);
 };
 
-module.exports = { promotionSaveAll: musinsaPromotionSaveAll };
+module.exports = { musinsaSaveAll };
