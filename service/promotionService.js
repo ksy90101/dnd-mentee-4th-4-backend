@@ -1,12 +1,11 @@
-const promotion = require('../models/Promotion.js');
-const { Promotion } = require('../models');
+const Promotion = require('../models/Promotion.js');
 
 const findAll = () => {
-  return promotion.findAll();
+  return Promotion.findAll();
 };
 
 const findByBrand = (brandId) => {
-  return promotion.findAll({
+  return Promotion.findAll({
     where: { brand_id: brandId },
   });
 };
