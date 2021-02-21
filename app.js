@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
 
@@ -18,6 +19,12 @@ const brandRouter = require('./routes/brandRouter.js');
 
 const app = express();
 passportConfig();
+
+const corsOptions = {
+  origin: 'https://zen-wilson-c85634.netlify.app',
+};
+
+app.use(cors(corsOptions));
 
 app.use(morgan('dev'));
 app.use(express.json());
