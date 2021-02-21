@@ -20,11 +20,7 @@ const brandRouter = require('./routes/brandRouter.js');
 const app = express();
 passportConfig();
 
-const corsOptions = {
-  origin: 'https://zen-wilson-c85634.netlify.app',
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(morgan('dev'));
 app.use(express.json());
