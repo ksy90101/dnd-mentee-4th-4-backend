@@ -16,6 +16,7 @@ const { sequelize } = require('./models');
 const promotionRouter = require('./routes/promotionRouter.js');
 const categoryRouter = require('./routes/categoryRouter.js');
 const brandRouter = require('./routes/brandRouter.js');
+const indexRouter = require('./routes/indexRouter.js');
 
 const app = express();
 passportConfig();
@@ -43,6 +44,7 @@ app.use(passport.session());
 
 app.use('/auth', authRouter);
 app.use('/api', [promotionRouter, categoryRouter, brandRouter]);
+app.use('/', indexRouter);
 
 sequelize.sync().then(() => {
   app.listen(8080);
