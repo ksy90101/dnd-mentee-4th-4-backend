@@ -23,6 +23,7 @@ Promotion.init(sequelize);
 User.init(sequelize);
 
 Brand.associate(db);
+Promotion.associate(db);
 Category.associate(db);
 
 module.exports = db;

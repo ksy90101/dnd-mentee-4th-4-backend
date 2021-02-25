@@ -1,4 +1,5 @@
 const Promotion = require('../models/Promotion.js');
+const Brand = require('../models/Brand.js');
 
 const findAll = () => {
   return Promotion.findAll();
@@ -10,7 +11,7 @@ const findByBrand = (brandId) => {
   });
 };
 
-const createAll = async (promotions, brandId) => {
+const createAll = async (promotions, brand) => {
   const savedPromotions = promotions.forEach((promotion) => {
     const promotionJson = JSON.parse(promotion);
 
@@ -19,8 +20,10 @@ const createAll = async (promotions, brandId) => {
       description: promotionJson.description,
       image: promotionJson.image,
       url: promotionJson.url,
-      brandId,
+      brandId: brand.id,
     };
+
+    console.log(brand)
 
     try {
       Promotion.create(createdPromotion);

@@ -1,12 +1,11 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
+const { findByName } = require('../../service/brandService.js');
 
-const BASE_URL = 'https://store.musinsa.com';
-
-async function getOne(page, index) {
+async function getOne(page, index, url) {
   const promotion = {};
   promotion.url =
-    BASE_URL +
+    url +
     (await page.$eval(
       `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a`,
       (data) => data.getAttribute('href'),
@@ -46,7 +45,7 @@ async function getOne(page, index) {
   return JSON.stringify(promotion);
 }
 
-async function getAll(page) {
+async function getAll(page, url) {
   const promotions = [];
 
   const $promotions = await page.$$eval(
@@ -55,7 +54,7 @@ async function getAll(page) {
   );
 
   for (let index = 0; index < $promotions; index++) {
-    const promotion = getOne(page, index + 1);
+    const promotion = getOne(page, index + url);
 
     promotions.push(promotion);
   }
@@ -63,15 +62,15 @@ async function getAll(page) {
   return Promise.all(promotions);
 }
 
-const musinsaCrawler = async () => {
+const musinsaCrawler = async (url) => {
   let promotions = [];
 
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(`${BASE_URL}/app/plan/lists`);
+    await page.goto(`${url}/app/plan/lists`);
 
-    promotions = await getAll(page);
+    promotions = await getAll(page, url);
 
     await browser.close();
   } catch (e) {
@@ -82,9 +81,11 @@ const musinsaCrawler = async () => {
 };
 
 const musinsaSaveAll = async () => {
-  const promotions = await musinsaCrawler();
+  const brand = await findByName('무신사');
 
-  await createAll(promotions, 1);
+  const promotions = await musinsaCrawler(brand.promotionUrl);
+
+  await createAll(promotions, brand);
 };
 
 module.exports = { musinsaSaveAll };
