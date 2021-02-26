@@ -1,12 +1,17 @@
 const Promotion = require('../models/Promotion.js');
 
-const findAll = () => {
-  return Promotion.findAll();
+const findAll = (page, size) => {
+  return Promotion.findAll({
+    limit: size ? +size : 0,
+    offset: page ? (page - 1) * size : 0,
+  });
 };
 
-const findByBrand = (brandId) => {
+const findByBrand = (brandId, page, size) => {
   return Promotion.findAll({
     where: { brand_id: brandId },
+    limit: size ? +size : 0,
+    offset: page ? (page - 1) * size : 0,
   });
 };
 
