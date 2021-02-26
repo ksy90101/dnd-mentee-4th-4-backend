@@ -1,5 +1,4 @@
 const Promotion = require('../models/Promotion.js');
-const Brand = require('../models/Brand.js');
 
 const findAll = () => {
   return Promotion.findAll();
@@ -22,8 +21,6 @@ const createAll = async (promotions, brand) => {
       url: promotionJson.url,
       brandId: brand.id,
     };
-
-    console.log(brand)
 
     try {
       Promotion.create(createdPromotion);

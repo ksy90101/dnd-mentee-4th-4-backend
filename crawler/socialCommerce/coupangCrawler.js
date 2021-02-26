@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
+const URL = 'https://www.coupang.com/np/exhibition/ALL';
+
 const httpsPrefix = 'https:';
 const coupangSourceUrl = `${httpsPrefix}//www.coupang.com`;
 
@@ -45,13 +47,13 @@ const coupangCrawler = (() => {
     return Promise.all(scrappedData);
   };
 
-  const run = async (url) => {
+  const run = async () => {
     let promotions;
 
     try {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      await page.goto(url);
+      await page.goto(URL);
 
       promotions = await getAll(page);
 
@@ -68,8 +70,7 @@ const coupangCrawler = (() => {
 
 const coupangCrawlerSaveAll = async () => {
   const brand = await findByName('쿠팡');
-
-  const promotions = await coupangCrawler.run(brand.promotionUrl);
+  const promotions = await coupangCrawler.run();
 
   await createAll(promotions, brand);
 };
