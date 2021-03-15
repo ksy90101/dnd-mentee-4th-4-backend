@@ -3,6 +3,14 @@ const sequelize = require('sequelize');
 
 const op = sequelize.Op;
 
+const findByName = (name) => {
+  return Brand.findOne({
+    where: {
+      name,
+    },
+  });
+};
+
 const findAll = () => {
   return Brand.findAll();
 };
@@ -17,5 +25,6 @@ const searchByName = (brandName) => {
 
 module.exports = {
   findAll,
+  findByName,
   searchByName,
 };

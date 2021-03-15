@@ -15,7 +15,7 @@ const findByBrand = (brandId, page, size) => {
   });
 };
 
-const createAll = async (promotions, brandId) => {
+const createAll = async (promotions, brand) => {
   const savedPromotions = promotions.forEach((promotion) => {
     const promotionJson = JSON.parse(promotion);
 
@@ -24,7 +24,7 @@ const createAll = async (promotions, brandId) => {
       description: promotionJson.description,
       image: promotionJson.image,
       url: promotionJson.url,
-      brandId,
+      brandId: brand.id,
     };
 
     try {
