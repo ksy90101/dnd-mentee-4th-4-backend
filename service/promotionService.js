@@ -2,7 +2,7 @@ const Promotion = require('../models/Promotion.js');
 
 const findAll = (page, size) => {
   return Promotion.findAll({
-    limit: size ? +size : 0,
+    limit: size ? +size : 20,
     offset: page ? (page - 1) * size : 0,
   });
 };
