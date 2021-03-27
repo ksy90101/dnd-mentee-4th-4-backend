@@ -1,9 +1,7 @@
 const express = require('express');
-const { isExistUser, createUser } = require('../service/loginService');
+const { isExistUser, createUser } = require('../service/userService');
 
-const router = express.Router();
-
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
   const result = await isExistUser(req.body.profile_id);
   if (result === -1) {
     res.status(500).end();

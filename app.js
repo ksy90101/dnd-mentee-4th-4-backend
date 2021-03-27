@@ -3,8 +3,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-const dotenv = require('dotenv');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
 
@@ -37,9 +37,8 @@ app.use(
 );
 
 app.use('/api', [promotionRouter, categoryRouter, brandRouter]);
-app.use('/login', loginRouter);
 app.use('/users', favoriteRouter);
-app.use('/', indexRouter);
+app.use('/', indexRouter, loginRouter);
 
 sequelize.sync().then(() => {
   app.listen(8081);
